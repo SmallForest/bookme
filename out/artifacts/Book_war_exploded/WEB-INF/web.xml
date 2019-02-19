@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <!--字符过滤器-->
+    <filter>
+        <filter-name>charset</filter-name>
+        <filter-class>com.imooc.filter.EncodeFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>charset</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <filter-name>auth</filter-name>
+        <filter-class>com.imooc.filter.AuthFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>auth</filter-name>
+        <url-pattern>/addBook.jsp</url-pattern>
+        <url-pattern>/catgory.jsp</url-pattern>
+        <url-pattern>/server.jsp</url-pattern>
+        <url-pattern>/showBooks.jsp</url-pattern>
+        <url-pattern>/top.jsp</url-pattern>
+        <url-pattern>/left.jsp</url-pattern>
+        <url-pattern>/AddBook*</url-pattern>
+        <url-pattern>/Catgory*</url-pattern>
+        <url-pattern>/ShowBooks*</url-pattern>
+    </filter-mapping>
+
+</web-app>
