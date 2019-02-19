@@ -3,7 +3,7 @@
 <html>
 <head>
 	<%
-		String basePath = "/Book_war_exploded";
+		String basePath = request.getContextPath();
 		String s = request.getParameter("s");
 		String msg="";
 		if(request.getAttribute("msg") != null){

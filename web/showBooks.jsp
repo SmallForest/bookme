@@ -5,7 +5,7 @@
 <html>
 <head>
 	<%
-		String basePath = "/Book_war_exploded";
+		String basePath = request.getContextPath();
 	%>
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
