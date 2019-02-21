@@ -70,36 +70,19 @@ public class LibDaoImpl {
 
     public List<Book> getBooksByCondition(String bookID, String bookName, String catgoryName) {
         List b = books;
-        //获取bookID符合的
-        if (!bookID.equals("")) {
-            Iterator it = b.iterator();
-            while (it.hasNext()){
-                Book book = (Book) it.next();
-                if (book.id != Integer.parseInt(bookID)){
-                    //remove item from b
-                    b.remove(book);
-                }
+        List new_b = new ArrayList();
+        if (bookID.equals("")){
+            bookID = "0";
+        }
+        Iterator it = b.iterator();
+        while (it.hasNext()){
+            Book book = (Book) it.next();
+            if (book.id == Integer.parseInt(bookID) || book.name.equals(bookName) || book.cate_name.equals(catgoryName)){
+                new_b.add(book);
             }
         }
-        if (!bookName.equals("")) {
-            Iterator it = b.iterator();
-            while (it.hasNext()){
-                Book book = (Book) it.next();
-                if (!book.name.equals(bookName)){
-                    //remove item from b
-                    b.remove(book);
-                }
-            }
-        }
-        if (!catgoryName.equals("")) {
-            Iterator it = b.iterator();
-            while (it.hasNext()){
-                Book book = (Book) it.next();
-                if (!book.cate_name.equals(catgoryName)){
-                    //remove item from b
-                    b.remove(book);
-                }
-            }
+        if(new_b.size()>0){
+            return new_b;
         }
         return b;
     }

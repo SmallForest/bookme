@@ -42,8 +42,17 @@ public class AddBookServlet extends HttpServlet {
             request.getRequestDispatcher("/addBook.jsp").forward(request, response);
             return;
         }
+        //判断price是否是数字
+        Double new_price = 0.00;
+        try {
+            new_price = Double.parseDouble(price);
+        }catch (NumberFormatException e){
+            request.setAttribute("msg", "请输入数字！");
+            request.getRequestDispatcher("/addBook.jsp").forward(request, response);
+            return;
+        }
         //插入数据
-        lsi.addBook(new Book(Integer.parseInt(id), bookName, catgoryName, Double.parseDouble(price), description));
+        lsi.addBook(new Book(Integer.parseInt(id), bookName, catgoryName,new_price, description));
         request.setAttribute("msg", "书籍添加成功！");
         request.getRequestDispatcher("/addBook.jsp").forward(request, response);
     }
