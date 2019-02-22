@@ -38,6 +38,16 @@
 					<td><input type="password" name="password" placeholder="长度为6-12位的纯数字" pattern="^\d{6,12}$"></td>
 				</tr>
 				<tr>
+					<td>验证码</td>
+					<td><input type="text" name="code" placeholder="长度为4位" pattern="^\w{4}$"></td>
+				</tr>
+				<tr>
+					<td>图片</td>
+					<td>
+						<img id="captcha_img" alt="点击更换" title="点击更换" onclick="changeVerifyCode(this)" src="<%=basePath%>/Kaptcha">
+					</td>
+				</tr>
+				<tr>
 					<td colspan="2" style="text-align:center">
 						<input type="submit" value="登录">
 						<input type="reset" value="取消">
@@ -46,5 +56,11 @@
 			</table>
 		</form>
 	</center>
+	<script>
+		<%--点击切换验证码--%>
+		function changeVerifyCode(img){
+			img.src = "<%=basePath%>/Kaptcha?"+Math.floor(Math.random()*100);
+		}
+	</script>
 </body>
 </html>
