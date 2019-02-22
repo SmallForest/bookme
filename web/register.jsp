@@ -46,6 +46,16 @@
 					<td><input type="email" name="email" placeholder="请输入正确邮箱格式" required="required"></td>
 				</tr>
 				<tr>
+					<td>验证码</td>
+					<td><input type="text" name="code" placeholder="长度为4位" pattern="^\w{4}$"></td>
+				</tr>
+				<tr>
+					<td>图片</td>
+					<td>
+						<img id="captcha_img" alt="点击更换" title="点击更换" onclick="changeVerifyCode(this)" src="<%=basePath%>/Kaptcha">
+					</td>
+				</tr>
+				<tr>
 					<td colspan="2" style="text-align:center">
 						<input type="submit" value="注册" id="submit">
 						<input type="reset" value="重置">

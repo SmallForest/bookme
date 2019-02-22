@@ -1,5 +1,6 @@
 package com.imooc.servlet;
 
+import com.google.code.kaptcha.Constants;
 import com.imooc.yangsen.LibServiceImpl;
 
 import javax.servlet.ServletException;
@@ -16,8 +17,20 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        System.out.println(username);
-        System.out.println(password);
+        String code = req.getParameter("code");
+        //获取session中的验证码和code对比
+        String s_code = (String) req.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        if (code != null && s_code != null) {
+            if (!code.equalsIgnoreCase(s_code)) {
+                req.setAttribute("msg", "验证码错误");
+                req.getRequestDispatcher("/index.jsp").forward(req, resp);
+                return;
+            }
+        } else {
+            req.setAttribute("msg", "验证码错误");
+            req.getRequestDispatcher("/index.jsp").forward(req, resp);
+            return;
+        }
         //执行登录
         LibServiceImpl lsi = new LibServiceImpl();
         if (lsi.isUserExist(username)) {

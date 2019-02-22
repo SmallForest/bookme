@@ -1,5 +1,6 @@
 package com.imooc.servlet;
 
+import com.google.code.kaptcha.Constants;
 import com.imooc.yangsen.LibServiceImpl;
 import com.imooc.yangsen.User;
 
@@ -19,6 +20,20 @@ public class RegisterServlet extends HttpServlet {
         String checkPWD = req.getParameter("checkPWD");
         String phone = req.getParameter("phone");
         String email = req.getParameter("email");
+        String code = req.getParameter("code");
+        //获取session中的验证码和code对比
+        String s_code = (String) req.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        if (code != null && s_code != null) {
+            if (!code.equalsIgnoreCase(s_code)) {
+                req.setAttribute("msg", "验证码错误");
+                req.getRequestDispatcher("/register.jsp").forward(req, resp);
+                return;
+            }
+        } else {
+            req.setAttribute("msg", "验证码错误");
+            req.getRequestDispatcher("/register.jsp").forward(req, resp);
+            return;
+        }
         //检查用户名是否合法
         LibServiceImpl lsi = new LibServiceImpl();
         if (username.equals("")) {
