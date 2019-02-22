@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet("/ShowBooksServlet")
@@ -29,6 +30,10 @@ public class ShowBooksServlet extends HttpServlet {
         String s = JSON.toJSONString(l);
         // content type 不然就会乱码
         response.setContentType("text/html;charset=UTF-8");
-        response.getWriter().print(s);
+        PrintWriter out = response.getWriter();
+        out.print(s);
+        out.flush();
+        // must be closed
+        out.close();
     }
 }
